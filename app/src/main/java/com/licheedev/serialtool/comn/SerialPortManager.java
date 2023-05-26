@@ -2,6 +2,8 @@ package com.licheedev.serialtool.comn;
 
 import android.os.HandlerThread;
 import android.serialport.SerialPort;
+import android.util.Log;
+
 import com.licheedev.hwutils.ByteUtil;
 import com.licheedev.myutils.LogPlus;
 import com.licheedev.serialtool.comn.message.LogManager;
@@ -16,6 +18,7 @@ import io.reactivex.disposables.Disposable;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Arrays;
 
 /**
  * Created by Administrator on 2017/3/28 0028.
@@ -134,6 +137,7 @@ public class SerialPortManager {
             @Override
             public void subscribe(ObservableEmitter<Object> emitter) throws Exception {
                 try {
+                    Log.i(TAG, "onDataSent [ byte[] ]: " + Arrays.toString(datas));
                     sendData(datas);
                     emitter.onNext(new Object());
                 } catch (Exception e) {
@@ -158,7 +162,9 @@ public class SerialPortManager {
         // TODO: 2018/3/22  
         LogPlus.i("发送命令：" + command);
 
-        byte[] bytes = ByteUtil.hexStr2bytes(command);
+        byte[] bytes = command.getBytes();
+        //byte[] bytes = ByteUtil.hexStr2bytes(command);
+
         rxSendData(bytes).subscribeOn(mSendScheduler).subscribe(new Observer<Object>() {
             @Override
             public void onSubscribe(Disposable d) {

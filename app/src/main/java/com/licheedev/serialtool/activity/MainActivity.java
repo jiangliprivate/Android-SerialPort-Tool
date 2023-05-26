@@ -138,7 +138,9 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemSele
     private void sendData() {
 
         String text = mEtData.getText().toString().trim();
-        if (TextUtils.isEmpty(text) || text.length() % 2 != 0) {
+        if (TextUtils.isEmpty(text) )
+        //if (TextUtils.isEmpty(text) || text.length() % 2 != 0)
+        {
             ToastUtil.showOne(this, "无效数据");
             return;
         }

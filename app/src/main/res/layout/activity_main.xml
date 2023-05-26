@@ -86,6 +86,7 @@
                 android:layout_height="@dimen/default_button_height"
                 android:digits="0123456789abcdefABCDEF"
                 android:hint="@string/input_data"
+                android:text="$001,1.234#"
                 android:inputType="textCapCharacters"
                 android:singleLine="true"
                 android:textSize="@dimen/edit_text_size" />
